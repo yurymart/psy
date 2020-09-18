@@ -1,9 +1,21 @@
-<Files ~ "^\.(htaccess|htpasswd)$">
-deny from all
-</Files>
-Options Indexes
-RewriteEngine on
-RewriteCond %{HTTP_HOST} ^(www\.yurymart\.ru)(:80)? [NC]
-RewriteRule ^(.*) http://yurymart.ru/$1 [R=301,L]
-Redirect permanent http://yurymart.ru/ https://www.yurymart.ru/
-order deny,allow
+Options +FollowSymLinks
+RewriteEngine On
+
+<IfModule mod_rewrite.c>
+
+	# Редирект домена без WWW на домен с WWW
+	RewriteCond %{HTTP_HOST} ^([^www].*)$
+	RewriteRule ^(.*)$ https://www.%1/$1 [L,R=301]
+
+	# Убираем лишние слеши на конце URL
+	RewriteCond %{THE_REQUEST} //
+	RewriteRule ^(.*)$ https://%{HTTP_HOST}/$0 [R=301,L]
+
+	# Убираем index.html на конце
+	RewriteCond %{REQUEST_URI} ^(.*)/index\.html$
+	RewriteRule ^(.*)index\.html$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+	# 301 Redirect
+	Redirect 301 /	https://www.yurymart.ru/
+
+</IfModule>
