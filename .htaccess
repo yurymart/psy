@@ -7,6 +7,12 @@ RewriteEngine On
 	RewriteCond %{HTTP_HOST} ^([^www].*)$
 	RewriteRule ^(.*)$ https://www.%1/$1 [L,R=301]
 
+	# Перенаправляем с HTTP на HTTPS
+	SetEnvIf X-HTTPS 1 HTTPS
+	RewriteBase /
+	RewriteCond %{HTTP:X-HTTPS} !1
+	RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
 	# Убираем лишние слеши на конце URL
 	RewriteCond %{THE_REQUEST} //
 	RewriteRule ^(.*)$ https://%{HTTP_HOST}/$0 [R=301,L]
