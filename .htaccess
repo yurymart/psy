@@ -1,7 +1,3 @@
-<Files ~ "^\.(htaccess|htpasswd)$">
-deny from all
-</Files>
-RewriteEngine on
-RewriteCond %{HTTP_HOST} ^(yurymart\.ru)(:80)? [NC]
-RewriteRule ^(.*) https://www.yurymart.ru/$1 [R=301,L]
-order deny,allow
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^yurymart.ru
+RewriteRule (.*) http://www.yurymart.ru/$1 [R=301,L]
