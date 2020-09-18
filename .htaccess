@@ -1,9 +1,9 @@
-<Files ~ "^\.(htaccess|htpasswd)$">
-deny from all
-</Files>
-RewriteEngine on
-RewriteCond %{HTTP_HOST} ^(yurymart\.ru)(:80)? [NC]
-RewriteRule ^(.*) https://www.yurymart.ru/$1 [R=301,L]
-Redirect permanent http://yurymart.ru https://www.yurymart.ru
-Redirect permanent https://yurymart.ru https://www.yurymart.ru
-order deny,allow
+Options +FollowSymLinks
+RewriteEngine On
+
+RewriteCond %{HTTP_HOST} ^([^www].*)$
+RewriteRule ^(.*)$ http://www.%1/$1 [L,R=301]
+
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
