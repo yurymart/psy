@@ -1,2 +1,2 @@
-RewriteCond %{HTTP_HOST} ^site\.ru$ [NC]
+RewriteCond %{HTTPS_HOST} ^site\.ru$ [NC]
 RewriteRule ^(.*)$ https://www.yurymart.ru/$1 [R=301,L]
