@@ -4,13 +4,6 @@ deny from all
 RewriteEngine on
 RewriteCond %{HTTP_HOST} ^(yurymart\.ru)(:80)? [NC]
 RewriteRule ^(.*) https://www.yurymart.ru/$1 [R=301,L]
-order deny,allow
-
-<Files ~ "^\.(htaccess|htpasswd)$">
-deny from all
-</Files>
-RewriteEngine on
-RewriteCond %{HTTP_HOST} ^(yurymart\.ru)(:80)? [NC]
-RewriteRule ^(.*) https://www.yurymart.ru/$1 [R=301,L]
 Redirect permanent http://yurymart.ru https://www.yurymart.ru
+Redirect permanent https://yurymart.ru https://www.yurymart.ru
 order deny,allow
