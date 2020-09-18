@@ -1,5 +1,3 @@
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteCond %{HTTP_HOST} ^yurymart.ru$
-RewriteRule (.*) https://www.yurymart.ru/$1 [R=301,L]
-</IfModule>
+//Страница ошибки 403
+ErrorDocument 403 https://www.yurymart.ru/
+
